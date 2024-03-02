@@ -24,6 +24,7 @@ import numpy as np
 import json
 from tool.transfer_tools import mask2bbox
 
+from glob import glob
 def clean():
     return None, None, None, None, None, None, [[], []]
 
@@ -1077,16 +1078,22 @@ def seg_track_app():
             ]
         )
         
+        # Get the directory where this script is located
+        script_directory = os.path.dirname(__file__)
+
+        # Glob for all .mp4 files in the assets directory
+        mp4_files = glob(os.path.join(script_directory, "assets", "*.mp4"))
         with gr.Tab(label='Video example'):
             gr.Examples(
-                examples=[
-                    # os.path.join(os.path.dirname(__file__), "assets", "840_iSXIa0hE8Ek.mp4"),
-                    os.path.join(os.path.dirname(__file__), "assets", "blackswan.mp4"),
-                    # os.path.join(os.path.dirname(__file__), "assets", "bear.mp4"),
-                    # os.path.join(os.path.dirname(__file__), "assets", "camel.mp4"),
-                    # os.path.join(os.path.dirname(__file__), "assets", "skate-park.mp4"),
-                    # os.path.join(os.path.dirname(__file__), "assets", "swing.mp4"),
-                    ],
+                # examples=[
+                #     # os.path.join(os.path.dirname(__file__), "assets", "840_iSXIa0hE8Ek.mp4"),
+                #     os.path.join(os.path.dirname(__file__), "assets", "blackswan.mp4"),
+                #     # os.path.join(os.path.dirname(__file__), "assets", "bear.mp4"),
+                #     # os.path.join(os.path.dirname(__file__), "assets", "camel.mp4"),
+                #     # os.path.join(os.path.dirname(__file__), "assets", "skate-park.mp4"),
+                #     # os.path.join(os.path.dirname(__file__), "assets", "swing.mp4"),
+                #     ],
+                examples = mp4_files,
                 inputs=[input_video],
             )
         
